@@ -29,7 +29,7 @@ if(isset($_POST['submit']))
 
 	}
 
-	if($email =="done" && $password=="done")
+	if($email ==" " && $password==" ")
 	{
 	// header("Location:complaint_form.php");
 
@@ -38,17 +38,22 @@ if(isset($_POST['submit']))
 		// $sql="insert into login (email , password) VALUES('$email_data','$password_data')";
 
 
-	$sql="Select * from login where email='$email_data' AND password='$password_data'";
+	echo $sql="Select * from login where email='$email_data' AND password='$password_data'";
 
 		$result = mysqli_query($conn,$sql);
 
-		if($result)
+		if(mysqli_num_rows($result)>0)
 		{
 			
 
 			$_SESSION['email'] = $email_data;
 
 			header("Location:complaint_form.php");
+		}
+
+		else
+		{
+			$not_found = "No User Found";
 		}
 	}
 
@@ -83,17 +88,17 @@ if(isset($_POST['submit']))
 			<form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="Post">
 				<span class="fs-1">Login Form</span>
 				<div class="row">
-					<div class="col">
-						<span>Enter name <span class="text-danger">*</span></span>
-						<input class="form-control" type="text" name="email" placeholder="Enter your email" value="<?php if(isset($_COOKIE['email'] )){ echo $_COOKIE['email']; }?>">
+					<div class="col p-2">
+						<span >Enter name <span class="text-danger">*</span></span>
+						<input class="form-control mt-2" type="text" name="email" placeholder="Enter your email" value="<?php if(isset($_COOKIE['email'] )){ echo $_COOKIE['email']; }?>">
 						<span class="text-danger"><?php if(isset($_POST['submit'])){ echo $email; } ?></span>
 
 						
 					</div>
 
-					<div class="col">
+					<div class="col p-2">
 						<span>Enter Password <span class="text-danger">*</span></span>
-						<input class="form-control" type="password" name="password" placeholder="Enter your Password" value="<?php if(isset($_COOKIE['password'])) { echo $_COOKIE['password']; } ?>">
+						<input class="form-control mt-2" type="password" name="password" placeholder="Enter your Password" value="<?php if(isset($_COOKIE['password'])) { echo $_COOKIE['password']; } ?>">
 						<span class="text-danger"><?php if(isset($_POST['submit'])){ echo $password; } ?></span>
 
 
@@ -113,8 +118,12 @@ if(isset($_POST['submit']))
 						<label class= "form-check-label"> not Rember me</label>
 
 				</div>
+				<div class="row">
+				<span class="row text-danger mt-2 alert "><?php if(isset($_POST['submit'])){ echo $not_found; } ?></span>
 
-				<input type="submit" name="submit" value="Login" class="btn btn-success mt-4 mb-2">
+				
+				</div>
+				<input  type="submit" name="submit" value="Login" class="btn btn-success mt-4 mb-2">
 			</form>
 		</div>
 </body>

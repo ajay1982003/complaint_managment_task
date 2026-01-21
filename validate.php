@@ -13,7 +13,7 @@ function email($email_data)
 	}
 	else
 	{
-		return "done";
+		return " ";
 	}
 
 }
@@ -33,7 +33,7 @@ function password($password_data)
 
  else
  {
- 	return "done";
+ 	return " ";
  }
 }
 

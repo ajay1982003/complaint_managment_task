@@ -3,7 +3,7 @@ session_start();
 include("conn.php");
 if(!isset($_SESSION['email']))
 {
-	header("Location:login.php");
+	header("Location:login_database.php");
 }
 if(isset($_POST['submit']))
 {	
@@ -172,8 +172,8 @@ if(isset($_POST['submit']))
 						<span>Priority</span><span class="text-danger">*</span>
 						<select name="priority" class="form-control">
 							<option value="">Select</option>
-							<option value="high">High</option>
-							<option value="low">Low</option>
+							<option value="High">High</option>
+							<option value="Low">Low</option>
 
 						</select>
 						<span class="text-danger"><?php if(isset($_POST['submit'])){ echo $Priority; } ?></span>
@@ -195,44 +195,7 @@ if(isset($_POST['submit']))
 				<input type="submit" name="submit" class="btn btn-success mt-3">
 			</form>
 	</div>
-<table class="table mt-4" border="1">
-<tr>
-	<th>Complaint id</th>
-	<th>Name</th>
-	<th>Email</th>
-	<th>No</th>
-</tr>
-<?php
 
-$sql1= "Select * from complaint_form ";
-
-$result1 = mysqli_query($conn,$sql1);
-
-while ($a=mysqli_fetch_array($result1)) {
-	
-
-
-?>
-
-<tr>
-	<th><?php echo $a['id'] ?></th>
-	<th><?php echo $a['name'] ?></th>
-	<th><?php echo $a['email'] ?></th>
-	<th><?php echo $a['mobil'] ?></th>
-
-
-
-</tr>
-<?php
-}
-
-
-?>
-
-</table>
-<div>
-		<a href="logout.php"><button class="btn btn-danger">Logout</button></a>
-</div>
 
 
 
