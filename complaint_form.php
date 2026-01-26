@@ -113,7 +113,7 @@ if(isset($_POST['submit']))
 
 			if($result)
 			{
-					header("Location:complaint_form.php");
+					header("Location:display_data.php");
 
 			}
 		}
@@ -136,6 +136,16 @@ if(isset($_POST['submit']))
 </head>
 <body>
 	<div class="container border mt-3 p-4">
+		<div class="row">
+		<div class="col-2">
+			<a href="display_data.php" ><button class="btn btn-primary">View data</button></a>
+		</div>
+
+		<div class="col-2">
+		<a href="logout.php"><button class="btn btn-danger">Logout</button></a>
+
+		</div>
+	</div>
 
 		<h1>Complaint form</h1>
 			<form action="<?php htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="post" enctype="multipart/form-data" >
@@ -194,6 +204,7 @@ if(isset($_POST['submit']))
 				</div>
 				<input type="submit" name="submit" class="btn btn-success mt-3">
 			</form>
+			<?php echo $_SESSION['email'] ; ?>
 	</div>
 
 

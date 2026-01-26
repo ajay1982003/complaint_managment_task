@@ -1,15 +1,15 @@
 <?php
+$database = "mysql:host=localhost;dbname=creart;";
+$conn = new PDO($database,"root","");
 
-$conn = mysqli_connect("localhost","root","","creart");
-
-if($conn)
+if(!$conn)
 {
-	echo "Connted";
+	die("not Connted");
 }
 
 else
 {
-	echo "not Connted";
+	echo "Connted";
 }
 
 

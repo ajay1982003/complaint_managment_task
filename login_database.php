@@ -31,17 +31,21 @@ if(isset($_POST['submit']))
 
 	if($email ==" " && $password==" ")
 	{
-	// header("Location:complaint_form.php");
+	header("Location:complaint_form.php");
 
-	// $_SESSION['email'] = $email_data;
+	$_SESSION['email'] = $email_data;
 
 		// $sql="insert into login (email , password) VALUES('$email_data','$password_data')";
+		$sql="Select * from login where email='$email' and password='$password'";
+		$result = mysqli_query($conn , $sql);
 
 
-	echo $sql="Select * from login where email='$email_data' AND password='$password_data'";
+	// $sql=$conn->prepare("Select * from login where email=? AND password=?");
 
-		$result = mysqli_query($conn,$sql);
-
+	// 	$sql->bind_param("ss",$email,$password);
+	// 	 $sql->execute();
+	// 	 $result = $sql->get_result();
+		 
 		if(mysqli_num_rows($result)>0)
 		{
 			
@@ -126,6 +130,8 @@ if(isset($_POST['submit']))
 				<input  type="submit" name="submit" value="Login" class="btn btn-success mt-4 mb-2">
 			</form>
 		</div>
+
+		
 </body>
 </html>
 
