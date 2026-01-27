@@ -21,7 +21,7 @@ if(isset($_POST['submit']))
 		$Message_data = $_POST['Message'];
 
 
-		
+
 
 
 	$date=date('Y-m-d H:i:s',$time);
