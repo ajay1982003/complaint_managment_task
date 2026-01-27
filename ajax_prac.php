@@ -4,16 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+	<style>
+		#insert_mess{
+			color:green;
+		}
+	</style>
     <title>Document</title>
 </head>
 <body>
 	<div class="border-1 border-danger w-50 ">
 		<form method="post">
-			<label class="form-label">Enter email</label>
-			<input type="text" name="email" id="email" class="form-control">
-			<label class="form-label">Enter Password</label>
-			<input type="password" name="password" id="password" class="form-control">
+			<div class="form-floating mt-4">
+			<input type="email" placeholder="name@example.com" id="floatingInputValue" name="email" id="floatingInput" class="form-control">
+			<label for="floatingInput">Enter email</label>
+			</div>
+			<div class="form-form-floating mt-3">
+			
+			<input type="password" name="password" id="floatingInputValue"  class="form-control" placeholder="Password">
+			<label for="floatingInput">Enter Password</label>
+			</div>
 
 			<input type="submit" id="insert" value="Insert" class="btn btn-success m-2">
 		</form>
@@ -21,10 +30,12 @@
 
     <button id="show-data" class="btn btn-success m-2">Show Data</button>
 
-<div >
-	<table id="data-show" class="table table-bordered table-striped w-50 border-dark">
+<div id="data-show" >
+	
+</div>
 
-	</table>
+<div id="insert_mess" >
+
 </div>
 </body>
 </html>
@@ -58,6 +69,7 @@ function loadData()
 
 
 }
+ loadData();
 
 $("#insert").click(function(e)
 {	
@@ -75,6 +87,7 @@ $("#insert").click(function(e)
 			if(data== "1")
 			{
 				loadData();
+				$("#insert_mess").html("Insert sucessfullys");
 			}
 			else
 			{
@@ -82,7 +95,9 @@ $("#insert").click(function(e)
 			}
 		}
 	});
-})
+});
+
+
 
 });
 

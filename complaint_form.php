@@ -25,6 +25,7 @@ if(isset($_POST['submit']))
 
 		move_uploaded_file($tmpname, "upload/".$filename);
 
+		$file_data = "upload".$filename;
 
 
 	$date=date('Y-m-d H:i:s',$time);
@@ -107,11 +108,19 @@ if(isset($_POST['submit']))
 
 		if($name==""&&$email=="" && $no=="" && $complain=="" && $Priority=="" && $Message=="")
 		{
-			$sql = "insert into complaint_form (name,email , mobil , complain , priority, message , file) VALUES('$name_data','$email_data','$no_data','$complain_data','$priority_data','$Message_data' , 'upload/$filename')";
 
-			$result = mysqli_query($conn,$sql);
+			$sql = $conn->prepare("insert into complaint_form (name,email , mobil , complain , priority, message , file) VALUES(?,?,?,?,?,?,?)");
+			$sql->bindParam(1,$name_data,PDO::PARAM_STR);
+			$sql->bindParam(2,$email_data,PDO::PARAM_STR);
+			$sql->bindParam(3,$no_data,PDO::PARAM_STR);
+			$sql->bindParam(4,$complain_data,PDO::PARAM_STR);
+			$sql->bindParam(5,$priority_data,PDO::PARAM_STR);
+			$sql->bindParam(6,$Message_data,PDO::PARAM_STR);
+			$sql->bindParam(7,$filename,PDO::PARAM_STR);
+			//$result = mysqli_query($conn,$sql);
+			$sql->execute();
 
-			if($result)
+			if($sql->rowCount()>0)
 			{
 					header("Location:display_data.php");
 

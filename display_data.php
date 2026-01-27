@@ -81,31 +81,38 @@ if(isset($_POST['filter']))
 {
 
 $priority_filter =$_POST['priority_filter'];
-$name_filter = $_POST['priority_name'];
+$name_filter = "%".$_POST['priority_name']."%";
 $complain_filter = $_POST['priority_complain'];
 
 
 
 	if($_POST['priority_filter']!=" ")
 	{
-	$sql1= "Select * from complaint_form where priority='$priority_filter' ";	
+	$sql1= $conn->prepare("Select * from complaint_form where priority=? ");	
+	$sql1->bindParam(1,$priority_filter,PDO::PARAM_STR);
 	}
 
 	if($_POST['priority_complain']!=" ")
 	{
-	$sql1= "Select * from complaint_form where complain='$complain_filter' ";	
+	$sql1= $conn->prepare( "Select * from complaint_form where complain= ? ");	
+	$sql1->bindParam(1,$complain_filter,PDO::PARAM_STR);
+
 	}
 
 	if($_POST['priority_name']!=NULL)
 	{
-	$sql1= "Select * from complaint_form where name LIKE '%$name_filter%' ";	
+	$sql1= $conn->prepare( "Select * from complaint_form where name LIKE ? ");	
+	$sql1->bindParam(1,$name_filter,PDO::PARAM_STR);
+
 	}
 
+	$sql1->execute();
 
+	$result1 = $sql1->fetchAll(PDO::FETCH_ASSOC);
 
-$result1 = mysqli_query($conn,$sql1);
+// $result1 = mysqli_query($conn,$sql1);
 
-while ($a=mysqli_fetch_array($result1)) {
+foreach($result1 as $a ) {
 	
 
 
